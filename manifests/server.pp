@@ -167,7 +167,8 @@ class mongodb::server (
 
       # Wrap the replset class
       class { 'mongodb::replset':
-        sets => $_replset_config
+        sets       => $_replset_config,
+        admin_user => $admin_username,
       }
 
       $replset_config_REAL = $_replset_config  # lint:ignore:variable_is_lowercase required for compatibility
@@ -176,7 +177,7 @@ class mongodb::server (
 
       # Make sure that the ordering is correct
       if $create_admin {
-        Class['mongodb::replset'] -> Mongodb::Db['admin']
+        Mongodb_user[$admin_username] -> Mongodb_replset<||>
       }
 
     }
