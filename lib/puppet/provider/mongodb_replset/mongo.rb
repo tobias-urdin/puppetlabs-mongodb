@@ -273,6 +273,10 @@ Puppet::Type.type(:mongodb_replset).provide(:mongo, :parent => Puppet::Provider:
     output.gsub!(/\w+\((?!")(\d+).+?(?<!")\)/, '\1')  # Remove extra parameters from 'Timestamp(1462971623, 1)' Objects
     output.gsub!(/\w+\((.+?)\)/, '\1')
 
+    # Remove Error: that happens with auth enabled
+    output.gsub!(/^Error\:.+/, '')
+
+
     #Hack to avoid non-json empty sets
     output = "{}" if output == "null\n"
 
