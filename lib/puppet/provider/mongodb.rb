@@ -81,7 +81,7 @@ class Puppet::Provider::Mongodb < Puppet::Provider
   def self.mongo_cmd(db, host, cmd)
     config = get_mongo_conf
 
-    args = [db, '--quiet', '--host', host]
+    args = [db, '--quiet']
     args.push('--ipv6') if ipv6_is_enabled(config)
 
     if ssl_is_enabled(config)
