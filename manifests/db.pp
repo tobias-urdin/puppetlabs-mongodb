@@ -8,7 +8,7 @@
 #  db_name - Database name. Defaults to $name.
 #  password_hash - Hashed password. Hex encoded md5 hash of "$username:mongo:$password".
 #  password - Plain text user password. This is UNSAFE, use 'password_hash' instead.
-#  roles (default: ['dbAdmin']) - array with user roles.
+#  roles (default: ['readWrite', 'dbAdmin']) - array with user roles.
 #  tries (default: 10) - The maximum amount of two second tries to wait MongoDB startup.
 #
 define mongodb::db (
@@ -16,7 +16,7 @@ define mongodb::db (
   $db_name       = $name,
   $password_hash = false,
   $password      = false,
-  $roles         = ['dbAdmin'],
+  $roles         = ['readWrite', 'dbAdmin'],
   $tries         = 10,
 ) {
 
